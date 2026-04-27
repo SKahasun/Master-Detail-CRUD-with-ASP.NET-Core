@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MobileFix</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/_1294372_Master_Details.styles.css" asp-append-version="true" />
+
+    <style>
+        :root {
+            --bg: #f3f6fb;
+            --surface: rgba(255, 255, 255, 0.9);
+            --surface-solid: #ffffff;
+            --primary: #0d6efd;
+            --primary-dark: #0b5ed7;
+            --accent: #0f172a;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: rgba(15, 23, 42, 0.08);
+            --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.05);
+            --radius-xl: 26px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top left, rgba(13, 110, 253, 0.10), transparent 30%), radial-gradient(circle at top right, rgba(15, 23, 42, 0.08), transparent 28%), linear-gradient(180deg, #eef3f9 0%, #f7f9fc 100%);
+            color: var(--text);
+        }
+
+        /* Top info bar */
+        .top-info-bar {
+            background: linear-gradient(90deg, #0b1220 0%, #111827 100%);
+            color: #d4dbe7;
+            font-size: 0.875rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+            .top-info-bar .container {
+                min-height: 46px;
+            }
+
+        .top-info-item {
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+
+        .top-info-bar a {
+            color: #d4dbe7;
+            text-decoration: none;
+            margin-left: 14px;
+            transition: 0.2s ease;
+        }
+
+            .top-info-bar a:hover {
+                color: #ffffff;
+                opacity: 0.95;
+            }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.84) !important;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+            padding: 14px 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -0.6px;
+            color: var(--primary) !important;
+        }
+
+            .navbar-brand span {
+                color: var(--accent);
+            }
+
+        .brand-badge {
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            margin-left: 6px;
+            vertical-align: super;
+            font-weight: 700;
+            box-shadow: 0 8px 18px rgba(13, 110, 253, 0.22);
+        }
+
+        .navbar-nav {
+            gap: 6px;
+        }
+
+            .navbar-nav .nav-link {
+                font-weight: 600;
+                color: #374151 !important;
+                padding: 10px 16px !important;
+                border-radius: 999px;
+                transition: all 0.22s ease;
+            }
+
+                .navbar-nav .nav-link:hover,
+                .navbar-nav .nav-link:focus {
+                    background: #eef4ff;
+                    color: var(--primary) !important;
+                }
+
+        .dropdown-menu {
+            border: 0;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 10px;
+        }
+
+        .dropdown-item {
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-weight: 500;
+        }
+
+            .dropdown-item:hover {
+                background: #eef4ff;
+                color: var(--primary);
+            }
+
+        /* Page shell */
+        .page-shell {
+            flex: 1;
+            padding: 34px 0 46px;
+        }
+
+        .main-content-wrapper {
+            background: var(--surface);
+            border: 1px solid rgba(229, 231, 235, 0.9);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+            padding: 34px;
+            min-height: 540px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .main-content-wrapper::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, rgba(13, 110, 253, 0.04), transparent 35%), linear-gradient(225deg, rgba(15, 23, 42, 0.03), transparent 40%);
+                pointer-events: none;
+            }
+
+            .main-content-wrapper > * {
+                position: relative;
+                z-index: 1;
+            }
+
+        /* Footer */
+        .mega-footer {
+            background: linear-gradient(180deg, #0f172a 0%, #090f1b 100%);
+            color: #b8c2d0;
+            margin-top: auto;
+        }
+
+        .footer-top {
+            padding: 68px 0 40px;
+        }
+
+        .footer-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 18px;
+            color: #ffffff;
+        }
+
+            .footer-brand span {
+                color: var(--primary);
+            }
+
+        .footer-note {
+            line-height: 1.85;
+            color: #c7d0df;
+            max-width: 520px;
+        }
+
+        .mega-footer h5 {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 22px;
+            font-size: 1rem;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .footer-list li {
+                margin-bottom: 12px;
+                line-height: 1.6;
+            }
+
+            .footer-list a {
+                color: #b8c2d0;
+                text-decoration: none;
+                transition: 0.2s ease;
+            }
+
+                .footer-list a:hover {
+                    color: #ffffff;
+                    padding-left: 4px;
+                }
+
+        .footer-divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-bottom-bar {
+            background: #070b13;
+            padding: 18px 0;
+            color: #94a3b8;
+            font-size: 0.92rem;
+        }
+
+            .footer-bottom-bar .container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+        /* Optional utility styles */
+        .section-card {
+            background: var(--surface-solid);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            padding: 24px;
+        }
+
+        .soft-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #eef4ff;
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @@media (max-width: 991.98px) {
+            .top-info-bar {
+                display: none;
+            }
+
+            .page-shell {
+                padding: 18px 0 28px;
+            }
+
+            .main-content-wrapper {
+                padding: 22px;
+                border-radius: 20px;
+                min-height: 420px;
+            }
+
+            .navbar-nav {
+                gap: 0;
+                margin-top: 12px;
+            }
+
+                .navbar-nav .nav-link {
+                    border-radius: 12px;
+                    padding: 10px 12px !important;
+                }
+        }
+    </style>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        function LoadData(ServiceId = null) {
+            var serviceContainer = $("#serviceContainer");
+
+            $.ajax({
+                url: "/Customer/AddNewService" + (ServiceId != null ? "?id=" + ServiceId : ""),
+                type: "GET",
+                success: function (data) {
+                    serviceContainer.append(data);
+                }
+            });
+        }
+
+        $(document).on("click", "#btnPlus", function (e) {
+            e.preventDefault();
+            LoadData();
+        });
+
+        $(document).on("click", "#btnDelete", function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+
+        });
+    </script>
+</head>
+<body>
+    <div class="top-info-bar d-none d-lg-block">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <span class="top-info-item"><strong>📞 Hotline:</strong> +880 1234-567890</span>
+                <span class="top-info-item"><strong>✉ Email:</strong> support@mobilefix.com</span>
+                <span class="top-info-item"><strong>🕒 Hours:</strong> Mon - Sat (9:00 AM - 8:00 PM)</span>
+            </div>
+            <div>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    Mobile<span>Fix</span><sup class="brand-badge">PRO</sup>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="Index">Customers</a>
+                        </li>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Administration
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Index">Role Management</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="AssignRole">Assign Role</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-shell">
+        <div class="container">
+            <main role="main" class="main-content-wrapper">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="mega-footer">
+        <div class="container footer-top">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">Mobile<span>Fix</span></div>
+                    <p class="footer-note">
+                        We deliver professional mobile repair services with reliable diagnostics, premium parts,
+                        and expert care for every device.
+                    </p>
+                    <p class="mt-4 text-white fw-semibold">Trusted by 15,000+ customers.</p>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-list">
+                        <li><a asp-controller="Home" asp-action="Index">Dashboard Home</a></li>
+                        <li><a asp-controller="Services" asp-action="Index">Our Pricing</a></li>
+                        <li><a asp-controller="Customer" asp-action="Index">Track a Device</a></li>
+                        <li><a href="#">Warranty Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Services</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Display Replacement</a></li>
+                        <li><a href="#">Battery Diagnostics</a></li>
+                        <li><a href="#">Liquid Damage Repair</a></li>
+                        <li><a href="#">Charging Port Repair</a></li>
+                        <li><a href="#">Board Micro-soldering</a></li>
+                        <li><a href="#">Data Recovery</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Contact</h5>
+                    <ul class="footer-list text-white">
+                        <li class="mb-3">
+                            📍 <strong>Head Office:</strong><br />
+                            <span class="text-secondary">123 Tech Center Avenue,<br />Dhaka</span>
+                        </li>
+                        <li class="mb-3">
+                            📞 <strong>Phone:</strong><br />
+                            <span class="text-secondary">+880 1234-567890</span>
+                        </li>
+                        <li class="mb-3">
+                            ✉ <strong>Email:</strong><br />
+                            <span class="text-secondary">repairs@mobilefix.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom-bar">
+            <div class="container">
+                <span>&copy; @DateTime.Now.Year - MobileFix Enterprise Repair Management System</span>
+                <span>Powered by ASP.NET Core MVC</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

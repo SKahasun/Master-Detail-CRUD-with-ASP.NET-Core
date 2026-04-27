@@ -1,0 +1,102 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="register-page">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white rounded-top-4 text-center">
+                    <h3 class="mb-0">Create Account</h3>
+                    <small>Join MobileFix System</small>
+                </div>
+
+                <div class="card-body p-4">
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Full Name</label>
+                                <input asp-for="Input.Name" class="form-control" placeholder="Enter your name" />
+                                <span asp-validation-for="Input.Name" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Phone</label>
+                                <input asp-for="Input.Phone" class="form-control" placeholder="01XXXXXXXXX" />
+                                <span asp-validation-for="Input.Phone" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Role</label>
+                                <input asp-for="Input.Role" class="form-control" placeholder="Manager / Admin" />
+                                <span asp-validation-for="Input.Role" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Address</label>
+                                <input asp-for="Input.Address" class="form-control" placeholder="Dhaka, Bangladesh" />
+                                <span asp-validation-for="Input.Address" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Email</label>
+                                <input asp-for="Input.Email" class="form-control" placeholder="name@example.com" />
+                                <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Password</label>
+                                <input asp-for="Input.Password" type="password" class="form-control" placeholder="Enter password" />
+                                <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Confirm Password</label>
+                                <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Confirm password" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 d-grid">
+                            <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg">
+                                Register Account
+                            </button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <small class="text-muted">Already have an account?</small>
+                            <a asp-page="/Account/Login" class="fw-semibold text-primary">Login here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .register-page {
+        padding-top: 20px;
+    }
+
+    .card {
+        backdrop-filter: blur(10px);
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.15rem rgba(13,110,253,.25);
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        transition: 0.2s ease;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

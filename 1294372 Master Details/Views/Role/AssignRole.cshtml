@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Assign Role";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h3 class="mb-0">Assign Role To User</h3>
+        </div>
+
+        <div class="card-body">
+            @if (TempData["msg"] != null)
+            {
+                <div class="alert alert-success text-center">
+                    @TempData["msg"]
+                </div>
+            }
+
+            <form asp-action="AssignRole" asp-controller="Role" method="post">
+                <div class="mb-3 row align-items-center">
+                    <label class="col-sm-3 col-form-label fw-semibold">Select User</label>
+                    <div class="col-sm-9">
+                        <select name="userData" class="form-select">
+                            <option selected disabled>-- Select User --</option>
+                            @foreach (var item in ViewBag.users)
+                            {
+                                <option value="@item.Email">@item.Email</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4 row align-items-center">
+                    <label class="col-sm-3 col-form-label fw-semibold">Select Role</label>
+                    <div class="col-sm-9">
+                        <select name="roleData" class="form-select">
+                            <option selected disabled>-- Select Role --</option>
+                            @foreach (var item in ViewBag.roles)
+                            {
+                                <option value="@item.NormalizedName">@item.NormalizedName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-person-check"></i> Assign Role
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        max-width: 700px;
+        margin: auto;
+    }
+
+    .form-select:focus {
+        box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        transition: 0.2s ease;
+    }
+</style>

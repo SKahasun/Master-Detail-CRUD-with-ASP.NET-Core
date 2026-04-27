@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav ms-lg-3 align-items-lg-center gap-1">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link d-flex align-items-center gap-2 px-3"
+               href="#"
+               id="userMenu"
+               role="button"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                     style="width:34px;height:34px;font-weight:700;">
+                    @User.Identity?.Name?.Substring(0, 1).ToUpper()
+                </div>
+
+                <span class="fw-semibold d-none d-lg-inline">
+                    @User.Identity?.Name
+                </span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2">
+                <li class="px-3 py-2 text-muted small">
+                    Signed in as
+                    <div class="fw-semibold text-dark">
+                        @User.Identity?.Name
+                    </div>
+                </li>
+
+                <li><hr class="dropdown-divider" /></li>
+
+                <li>
+                    <a class="dropdown-item"
+                       asp-area="Identity"
+                       asp-page="/Account/Manage/Index">
+                        👤 Profile
+                    </a>
+                </li>
+
+                <li>
+                    <form asp-area="Identity"
+                          asp-page="/Account/Logout"
+                          asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="dropdown-item text-danger">
+                            🚪 Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link fw-semibold px-3"
+               asp-area="Identity"
+               asp-page="/Account/Login">
+                Login
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="btn btn-primary btn-sm px-3 ms-lg-2 shadow-sm"
+               asp-area="Identity"
+               asp-page="/Account/Register">
+                Register
+            </a>
+        </li>
+    }
+
+</ul>

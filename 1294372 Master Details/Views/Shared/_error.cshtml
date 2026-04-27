@@ -1,0 +1,23 @@
+﻿<div class="alert alert-danger d-flex justify-content-between align-items-center shadow-sm rounded-4 px-4 py-3" role="alert">
+
+    <div class="d-flex align-items-center">
+        <div class="me-3 fs-4">❌</div>
+        <div>
+            <div class="fw-bold">Operation Failed</div>
+            <div class="small">Something went wrong while saving data. Please try again.</div>
+        </div>
+    </div>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+</div>
+
+<script>
+    setTimeout(() => {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            alert.classList.add('fade');
+            setTimeout(() => alert.remove(), 400);
+        }
+    }, 3000);
+</script>

@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Role Management";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-info text-white rounded-top-4">
+            <h3 class="mb-0">Role Management</h3>
+        </div>
+
+        <div class="card-body">
+            @if (ViewBag.msg != null)
+            {
+                <div class="alert alert-success text-center">
+                    @ViewBag.msg
+                </div>
+            }
+
+            <form asp-action="CreateRole" asp-controller="Role" method="post">
+                <div class="row align-items-center g-3">
+                    <div class="col-md-8">
+                        <label class="form-label fw-semibold">Role Name</label>
+                        <input type="text" name="userRole" class="form-control" placeholder="Enter role name..." required />
+                    </div>
+
+                    <div class="col-md-4 text-end mt-4">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-plus-circle"></i> Create Role
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        max-width: 700px;
+        margin: auto;
+    }
+
+    input:focus {
+        box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        transition: 0.2s ease;
+    }
+</style>

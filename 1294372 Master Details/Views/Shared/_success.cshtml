@@ -1,0 +1,28 @@
+﻿<div class="alert alert-success d-flex align-items-center justify-content-between shadow-sm rounded-4 px-4 py-3" role="alert">
+
+    <div class="d-flex align-items-center">
+        <div class="me-3 fs-4">✅</div>
+        <div>
+            <div class="fw-bold">Success!</div>
+            <div class="small">Database operation completed successfully.</div>
+        </div>
+    </div>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+</div>
+
+<script>
+    setTimeout(() => {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            alert.classList.remove('show');
+            alert.classList.add('fade');
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 1000);
+
+    setTimeout(function(){
+        window.location.href='@Url.Action("Index","Customer")';
+    },1700)
+</script>

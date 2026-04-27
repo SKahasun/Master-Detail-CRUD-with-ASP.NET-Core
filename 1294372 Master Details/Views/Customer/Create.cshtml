@@ -1,0 +1,263 @@
+﻿@model CustomerVM
+@{
+    ViewData["Title"] = "Create Customer";
+}
+
+<style>
+    .form-card {
+        background: rgba(255,255,255,0.92);
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        padding: 10px 14px;
+    }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13,110,253,0.15);
+        }
+
+    .preview-img {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 16px;
+        border: 4px solid #fff;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .service-panel {
+        position: sticky;
+        top: 90px;
+        background: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .btn-modern {
+        border-radius: 999px;
+        padding: 10px 22px;
+        font-weight: 600;
+    }
+
+    .btn-circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .problem-box {
+        background: #fff5f5;
+        border-left: 4px solid #fa5252;
+        border-radius: 10px;
+        padding: 10px;
+    }
+</style>
+
+<div class="container py-4">
+
+    <form id="frmCreate"
+          asp-action="Create"
+          asp-controller="Customer"
+          data-ajax="true"
+          data-ajax-method="post"
+          data-ajax-mode="replace"
+          data-ajax-update="#panel"
+          data-ajax-success="success"
+          enctype="multipart/form-data">
+
+        <div class="row g-4">
+
+            <!-- LEFT FORM -->
+            <div class="col-lg-7">
+                <div class="form-card">
+
+                    <h3 class="section-title text-primary">Add New Customer</h3>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label asp-for="CustomerName" class="form-label"></label>
+                            <input asp-for="CustomerName" class="form-control" />
+                            <span asp-validation-for="CustomerName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Phone" class="form-label"></label>
+                            <input asp-for="Phone" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="DeviceName" class="form-label"></label>
+                            <input asp-for="DeviceName" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="DeviceAge" class="form-label"></label>
+                            <input asp-for="DeviceAge" type="number" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="EntryDate" class="form-label"></label>
+                            <input asp-for="EntryDate" type="date" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="BuyingDate" class="form-label"></label>
+                            <input asp-for="BuyingDate" type="date" class="form-control" />
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Problem" class="form-label"></label>
+                            <div class="problem-box">
+                                <input asp-for="Problem" class="form-control border-0 bg-transparent" />
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Address" class="form-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                        </div>
+
+                        <div class="col-12 d-flex align-items-center gap-2">
+                            <input asp-for="IsRegular" type="checkbox" />
+                            <label asp-for="IsRegular" class="mb-0">Regular Customer</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="DevicePictureFile" class="form-label"></label>
+                            <input asp-for="DevicePictureFile" type="file" class="form-control" id="imgInput" />
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <button type="submit" class="btn btn-primary btn-modern shadow">
+                                💾 Save Customer
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT SERVICE PANEL -->
+            <div class="col-lg-5">
+                <div class="service-panel">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Service List</h5>
+                        <a id="btnPlus" class="btn btn-primary btn-circle">+</a>
+                    </div>
+
+                    <div id="serviceContainer">
+                        <script>
+                            LoadData()
+                        </script>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <div id="panel"></div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/ajax/dist/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        function success(){
+            $("#frmCreate").trigger('reset')
+        }
+
+        document.getElementById('BuyingDate').addEventListener('change', function () {
+            const buyingDate = new Date(this.value);
+
+            if (isNaN(buyingDate)) return;
+
+            const today = new Date();
+
+            const years  = today.getFullYear() - buyingDate.getFullYear();
+            const months = today.getMonth()    - buyingDate.getMonth();
+
+            const totalMonths = years * 12 + months;
+
+            document.getElementById('DeviceAge').value = totalMonths >= 0 ? totalMonths : 0;
+        });
+
+                // Validate Service List before submit
+        document.getElementById('frmCreate').addEventListener('submit', function (e) {
+            const serviceItems = document.querySelectorAll('#serviceContainer input, #serviceContainer select, #serviceContainer tr');
+
+            if (serviceItems.length === 0) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Show error message
+                let errorMsg = document.getElementById('serviceError');
+                if (!errorMsg) {
+                    errorMsg = document.createElement('div');
+                    errorMsg.id = 'serviceError';
+                    errorMsg.className = 'text-danger mt-1';
+                    errorMsg.innerText = '⚠ Please add at least one service before saving.';
+                    document.getElementById('serviceContainer').before(errorMsg);
+                }
+
+                // Scroll to service section
+                document.getElementById('serviceContainer').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Remove error message when a service is added
+        const observer = new MutationObserver(function () {
+            const serviceItems = document.querySelectorAll('#serviceContainer input, #serviceContainer select, #serviceContainer tr');
+            const errorMsg = document.getElementById('serviceError');
+            if (serviceItems.length > 0 && errorMsg) {
+                errorMsg.remove();
+            }
+        });
+
+        observer.observe(document.getElementById('serviceContainer'), { childList: true, subtree: true });
+
+
+                // ── Duplicate Service Validation ──
+        document.getElementById('serviceContainer').addEventListener('change', function (e) {
+            if (e.target.tagName === 'SELECT') {
+                const allSelects = document.querySelectorAll('#serviceContainer select');
+                const selectedValue = e.target.value;
+
+                let duplicateFound = false;
+
+                allSelects.forEach(function (sel) {
+                    if (sel !== e.target && sel.value === selectedValue && selectedValue !== '') {
+                        duplicateFound = true;
+                    }
+                });
+
+                if (duplicateFound) {
+                    alert('⚠ This service is already added! Please select a different service.');
+                    e.target.value = ''; // reset the duplicate dropdown
+                }
+            }
+        });
+    </script>
+}

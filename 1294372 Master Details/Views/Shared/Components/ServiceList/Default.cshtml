@@ -1,0 +1,198 @@
+﻿@model IEnumerable<Service>
+
+<style>
+    .vc-wrapper {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+        padding: 26px 28px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .vc-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0d6efd, #4dabf7, #0d6efd);
+            background-size: 200% 100%;
+            animation: vc-shimmer 2.5s ease-in-out infinite;
+        }
+
+        .vc-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.04), transparent 35%), linear-gradient(225deg, rgba(15, 23, 42, 0.03), transparent 40%);
+            pointer-events: none;
+        }
+
+    @@keyframes vc-shimmer {
+        0% {
+            background-position: 200% 0;
+        }
+
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    .vc-inner {
+        position: relative;
+        z-index: 1;
+    }
+
+    .vc-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .vc-icon-box {
+        width: 40px;
+        height: 40px;
+        background: #eef4ff;
+        border: 1px solid rgba(13, 110, 253, 0.15);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.08);
+    }
+
+    .vc-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1f2937;
+        letter-spacing: -0.2px;
+        margin: 0;
+    }
+
+    .vc-subtitle {
+        font-size: 12px;
+        color: #6b7280;
+        font-weight: 400;
+        margin: 3px 0 0;
+    }
+
+    .vc-divider {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(13, 110, 253, 0.15), rgba(229, 231, 235, 0.5), transparent);
+        margin-bottom: 18px;
+    }
+
+    .vc-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+    }
+
+    .vc-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 15px;
+        background: #eef4ff;
+        color: #0b5ed7;
+        border: 1px solid rgba(13, 110, 253, 0.18);
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: default;
+        transition: all 0.22s ease;
+    }
+
+        .vc-badge:hover {
+            background: #0d6efd;
+            color: #ffffff;
+            border-color: #0d6efd;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.28);
+        }
+
+            .vc-badge:hover .vc-dot {
+                background: rgba(255, 255, 255, 0.8);
+                transform: scale(1.3);
+            }
+
+    .vc-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #0d6efd;
+        flex-shrink: 0;
+        transition: all 0.22s ease;
+    }
+
+    .vc-footer {
+        margin-top: 18px;
+        display: flex;
+        align-items: center;
+    }
+
+    .vc-count {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        color: #6b7280;
+        font-weight: 500;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+    }
+
+    .vc-count-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        background: #0d6efd;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        border-radius: 999px;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+    }
+</style>
+
+<div class="vc-wrapper">
+    <div class="vc-inner">
+
+        <div class="vc-header">
+            <div class="vc-icon-box">⚙️</div>
+            <div>
+                <p class="vc-title">Available Services</p>
+                <p class="vc-subtitle">Tap a service to learn more</p>
+            </div>
+        </div>
+
+        <div class="vc-divider"></div>
+
+        <div class="vc-grid">
+            @foreach (var s in Model)
+            {
+                <span class="vc-badge">
+                    <span class="vc-dot"></span>
+                    @s.ServiceName
+                </span>
+            }
+        </div>
+
+        <div class="vc-footer">
+            <span class="vc-count">
+                <span class="vc-count-badge">@Model.Count()</span>
+                services available
+            </span>
+        </div>
+
+    </div>
+</div>

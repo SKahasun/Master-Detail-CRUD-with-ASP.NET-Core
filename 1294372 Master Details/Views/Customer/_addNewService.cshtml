@@ -1,0 +1,9 @@
+﻿@model Service
+<div class="row mb-2">
+    <div class="col-10">
+        @Html.DropDownListFor(x => x.ServiceId, (SelectList)ViewBag.Service, "—--- Select a service ---—", new { @class = "form-select" })
+    </div>
+    <div class="col-2">
+        <a href="#" id="btnDelete" class="btn btn-danger btn-sm"><b>-</b></a>
+    </div>
+</div>

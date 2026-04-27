@@ -1,0 +1,358 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="home-page">
+    <!-- HERO -->
+    <section class="hero-section section-card mb-4">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <span class="soft-pill mb-3">📱 MobileFix Enterprise Repair Management</span>
+                <h1 class="display-5 fw-bold mb-3">
+                    Smart Mobile Repair, Service Tracking & Customer Management
+                </h1>
+                <p class="lead text-muted mb-4">
+                    Manage customers, services, repair status, warranties, and business operations from one modern dashboard.
+                    This homepage is designed to feel professional, clean, and practical for your application.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <a asp-controller="Customer" asp-action="Index" class="btn btn-primary btn-lg px-4">
+                        Go to Customers
+                    </a>
+                    <a asp-controller="Services" asp-action="Index" class="btn btn-outline-primary btn-lg px-4">
+                        View Services
+                    </a>
+                    <a asp-controller="Role" asp-action="Index" class="btn btn-dark btn-lg px-4">
+                        Role Management
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-5">
+                <div class="dashboard-preview p-4 rounded-4 bg-white shadow-sm border h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Today’s Summary</h5>
+                        <span class="badge text-bg-success">Live</span>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="stat-card">
+                                <h2 class="fw-bold mb-0">128</h2>
+                                <small class="text-muted">Customers</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-card">
+                                <h2 class="fw-bold mb-0">42</h2>
+                                <small class="text-muted">Jobs Open</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-card">
+                                <h2 class="fw-bold mb-0">18</h2>
+                                <small class="text-muted">Completed</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-card">
+                                <h2 class="fw-bold mb-0">99%</h2>
+                                <small class="text-muted">Satisfaction</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="mini-timeline">
+                        <div class="timeline-item">
+                            <span class="dot"></span>
+                            <div>
+                                <strong>7 New repairs</strong>
+                                <div class="text-muted small">Received today from walk-in customers</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="dot"></span>
+                            <div>
+                                <strong>4 Devices delivered</strong>
+                                <div class="text-muted small">Completed and handed over successfully</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item mb-0">
+                            <span class="dot"></span>
+                            <div>
+                                <strong>2 Staff updates</strong>
+                                <div class="text-muted small">Technician assignment updated</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @await Component.InvokeAsync("ServiceList")
+
+    <!-- FEATURE CARDS -->
+    <section class="mb-4">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="feature-card section-card h-100">
+                    <div class="feature-icon">👥</div>
+                    <h5 class="fw-bold mt-3">Customer Management</h5>
+                    <p class="text-muted mb-0">Store customer details, device information, and service history in one place.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card section-card h-100">
+                    <div class="feature-icon">🛠️</div>
+                    <h5 class="fw-bold mt-3">Repair Tracking</h5>
+                    <p class="text-muted mb-0">Track diagnosis, parts replacement, and job status from intake to delivery.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card section-card h-100">
+                    <div class="feature-icon">🛡️</div>
+                    <h5 class="fw-bold mt-3">Role Security</h5>
+                    <p class="text-muted mb-0">Control access with role-based authorization and secure admin actions.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card section-card h-100">
+                    <div class="feature-icon">📊</div>
+                    <h5 class="fw-bold mt-3">Business Reports</h5>
+                    <p class="text-muted mb-0">Monitor service volume, daily earnings, and performance at a glance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPLIT CONTENT -->
+    <section class="mb-4">
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-6">
+                <div class="section-card h-100">
+                    <h3 class="fw-bold mb-3">Why this dashboard is useful</h3>
+                    <p class="text-muted mb-4">
+                        Your homepage can act as the main control center for the whole repair shop application.
+                        It gives quick access to the most important modules and helps users understand system status immediately.
+                    </p>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-3">✅ Faster access to customers and service pages</li>
+                        <li class="mb-3">✅ Clean navigation for admin and staff users</li>
+                        <li class="mb-3">✅ Good structure for future modules like billing and warranty</li>
+                        <li class="mb-0">✅ Professional first impression for your application</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="section-card h-100 bg-primary text-white">
+                    <h3 class="fw-bold mb-3">Quick Actions</h3>
+                    <p class="mb-4">
+                        Use these shortcuts to jump directly into the most common tasks.
+                    </p>
+                    <div class="d-grid gap-2 d-md-flex flex-wrap">
+                        <a asp-controller="Customer" asp-action="Index" class="btn btn-light text-primary fw-semibold">Add / View Customers</a>
+                        <a asp-controller="Services" asp-action="Index" class="btn btn-outline-light fw-semibold">Manage Services</a>
+                        <a asp-controller="Role" asp-action="AssignRole" class="btn btn-dark fw-semibold">Assign Role</a>
+                    </div>
+                    <hr class="border-light opacity-25 my-4" />
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="quick-box">
+                                <div class="fw-bold fs-4">24</div>
+                                <div class="small">Technicians</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="quick-box">
+                                <div class="fw-bold fs-4">56</div>
+                                <div class="small">Devices Pending</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="quick-box">
+                                <div class="fw-bold fs-4">12</div>
+                                <div class="small">Ready Today</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES HIGHLIGHT -->
+    <section class="mb-4">
+        <div class="section-card">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h3 class="fw-bold mb-0">Service Highlights</h3>
+                <span class="text-muted">Popular repair modules</span>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4 col-lg-2">
+                    <div class="service-chip">Screen Repair</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="service-chip">Battery Change</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="service-chip">Charging Port</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="service-chip">Software Fix</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="service-chip">Water Damage</div>
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <div class="service-chip">Data Recovery</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACTIVITY + SUPPORT -->
+    <section class="mb-2">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="section-card h-100">
+                    <h4 class="fw-bold mb-4">Recent Activity</h4>
+                    <div class="activity-item">
+                        <span class="activity-dot"></span>
+                        <div>
+                            <strong>New service request submitted</strong>
+                            <p class="text-muted mb-0">A customer registered a mobile repair ticket with device details.</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-dot"></span>
+                        <div>
+                            <strong>Role assigned successfully</strong>
+                            <p class="text-muted mb-0">An admin role was given to a staff member for better access control.</p>
+                        </div>
+                    </div>
+                    <div class="activity-item mb-0">
+                        <span class="activity-dot"></span>
+                        <div>
+                            <strong>Repair completed</strong>
+                            <p class="text-muted mb-0">One device was repaired, tested, and marked ready for delivery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="section-card h-100">
+                    <h4 class="fw-bold mb-3">Need Help?</h4>
+                    <p class="text-muted">
+                        This section can guide users to the main parts of your system and make navigation easier.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Refresh Dashboard</a>
+                        <a asp-controller="Customer" asp-action="Index" class="btn btn-outline-primary">Open Customers</a>
+                        <a asp-controller="Services" asp-action="Index" class="btn btn-outline-primary">Open Services</a>
+                        <a asp-controller="Role" asp-action="Index" class="btn btn-outline-primary">Open Roles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .home-page {
+        padding: 6px 0 18px;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, rgba(13, 110, 253, 0.08), rgba(255, 255, 255, 0.65));
+    }
+
+    .section-card {
+        background: #ffffff;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+        padding: 24px;
+    }
+
+    .dashboard-preview {
+        border-radius: 22px;
+    }
+
+    .stat-card {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 16px;
+        padding: 16px;
+        min-height: 92px;
+    }
+
+    .feature-card {
+        transition: 0.2s ease;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+        }
+
+    .feature-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #eef4ff;
+        font-size: 1.5rem;
+    }
+
+    .quick-box {
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 16px;
+        padding: 14px;
+        text-align: center;
+    }
+
+    .service-chip {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 999px;
+        padding: 10px 14px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .mini-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .timeline-item,
+    .activity-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .dot,
+    .activity-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #0d6efd;
+        margin-top: 6px;
+        flex: 0 0 auto;
+    }
+
+    @@media (max-width: 768px) {
+        .section-card {
+            padding: 18px;
+        }
+    }
+</style>

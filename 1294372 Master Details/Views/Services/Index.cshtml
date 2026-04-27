@@ -1,0 +1,169 @@
+﻿@model IEnumerable<_1294372_Master_Details.Models.Entity.Service>
+
+@{
+    ViewData["Title"] = "Services";
+}
+
+<style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+        .page-header h2 {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+    .service-card {
+        border-radius: 22px;
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+        .service-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+    .left-panel {
+        background: linear-gradient(135deg, #0d6efd, #4dabf7);
+        color: #fff;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .service-icon {
+        width: 90px;
+        height: 90px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        margin: 0 auto 15px;
+    }
+
+    .badge-soft {
+        background: rgba(255,255,255,0.25);
+        padding: 6px 16px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .btn-soft {
+        border-radius: 999px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container py-4">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div>
+            <h2 class="text-primary">Service Dashboard</h2>
+            <p class="text-muted mb-0">
+                Manage all repair services & offerings
+            </p>
+        </div>
+
+        <a asp-action="Create" class="btn btn-primary btn-soft px-4 shadow-sm">
+            + Add Service
+        </a>
+    </div>
+
+    <!-- Service Cards -->
+    <div class="row g-4">
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var service in Model)
+            {
+                <div class="col-lg-12">
+                    <div class="service-card">
+                        <div class="row g-0">
+
+                            <!-- LEFT PANEL -->
+                            <div class="col-md-3 left-panel">
+                                <div class="service-icon">🛠</div>
+
+                                <h5 class="fw-bold mb-2">
+                                    @service.ServiceName
+                                </h5>
+
+                                <span class="badge-soft">
+                                    Service ID: @service.ServiceId
+                                </span>
+
+                                <div class="d-grid gap-2 mt-4">
+                                    <a asp-action="Edit" asp-route-id="@service.ServiceId"
+                                       class="btn btn-light btn-sm btn-soft">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="Delete" asp-route-id="@service.ServiceId"
+                                       class="btn btn-outline-light btn-sm btn-soft">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- RIGHT PANEL -->
+                            <div class="col-md-9 p-4">
+
+                                <h6 class="fw-bold mb-3 text-secondary">
+                                    Service Information
+                                </h6>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <small class="text-muted">Service Name</small>
+                                        <div class="fw-semibold">
+                                            @service.ServiceName
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <small class="text-muted">Service Code</small>
+                                        <div class="fw-semibold">
+                                            #@service.ServiceId
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <a asp-action="Details"
+                                       asp-route-id="@service.ServiceId"
+                                       class="btn btn-outline-primary btn-sm btn-soft">
+                                        View Details
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <h5 class="text-muted">😕 No services found</h5>
+                <p class="text-muted">Start by adding your first service</p>
+                <a asp-action="Create" class="btn btn-primary btn-soft">
+                    Create Service
+                </a>
+            </div>
+        }
+
+    </div>
+</div>
